@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose'
-import Post from "./Post.js";
+import router from "./router.js";
 
 const PORT = 5000;
 const DB_URL = `mongodb+srv://ma:Mongodb_2022@cluster0.duzhxff.mongodb.net/?retryWrites=true&w=majority`
@@ -8,6 +8,7 @@ const DB_URL = `mongodb+srv://ma:Mongodb_2022@cluster0.duzhxff.mongodb.net/?retr
 const app = express()
 
 app.use(express.json()) // преобразовывает в Json формат
+app.use('/api', router)
 
 // app.get('/', (req, res) => {
 //     console.log(req.query.name)
@@ -15,19 +16,19 @@ app.use(express.json()) // преобразовывает в Json формат
 //     res.status(200).json('Сервер работает good')
 // })
 
-app.post('/', async (req, res) => {
-    try {
-        const {author, title, content, picture} = req.body
-        const post = await Post.create({author, title, content, picture});
-        // console.log(req.query.name)
-        // console.log(req.body)
-        res.json(post)
-    }
-    catch (e) {
-        res.status(500).json(e);
-    }
+// app.post('/', async (req, res) => {
+//     try {
+//         const {author, title, content, picture} = req.body
+//         const post = await Post.create({author, title, content, picture});
+//         // console.log(req.query.name)
+//         // console.log(req.body)
+//         res.json(post)
+//     }
+//     catch (e) {
+//         res.status(500).json(e);
+//     }
+// })
 
-})
 
 async function startApp() {
     try {
